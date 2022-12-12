@@ -7,27 +7,36 @@ import reactPlugin from '@vitejs/plugin-react'
 
 import { main, resources } from './package.json'
 
-const [nodeModules, devFolder] = normalize(dirname(main)).split(/\/|\\/g)
-const devPath = [nodeModules, devFolder].join('/')
+const [devFolder] = normalize(dirname(main)).split(/\/|\\/g)
+const devPath = [devFolder].join('/')
 
 const tsconfigPaths = tsconfigPathsPlugin({
   projects: [resolve('tsconfig.json')],
 })
 
+const isDev = process.env.NODE_ENV === 'development'
+const devAlias = {}
 export default defineConfig({
   main: {
     plugins: [tsconfigPaths],
 
     build: {
+      // ssr: true, // https://github.com/vitejs/vite/issues/4405
+      // assetsInlineLimit: 1600000, // 1.6MB (default: 4096)
       rollupOptions: {
         input: {
           index: resolve('src/main/index.ts'),
+          gen: resolve('src/gen/index.ts'),
         },
 
         output: {
           dir: resolve(devPath, 'main'),
         },
       },
+    },
+
+    resolve: {
+      alias: isDev ? devAlias : {},
     },
   },
 
