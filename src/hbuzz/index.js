@@ -1,5 +1,6 @@
 import hbjs from './hbjs'
-import hbWasm from './hb.wasm?url'
+import hbWasm from '/hb.wasm'
+import fetch from 'node-fetch'
 
 //Hint::: Got the wasm file loader outside for better debugging, alternatively we can use vite-wasm plugin or rollup plugins
 async function initWasm(opts = {}, url) {

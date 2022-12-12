@@ -1,10 +1,11 @@
 import { app } from 'electron'
+import fetch from 'node-fetch'
 
 import { makeAppSetup, makeAppWithSingleInstanceLock } from './factories'
 import { MainWindow, registerAboutWindowCreationByIPC } from './windows'
 
 import getHBWasm from 'hbuzz'
-import fontBlob from './Roboto-Black.ttf'
+import fontBlob from '/Roboto-Black.ttf'
 
 function render_font(hb: any, fontData: any, text: any) {
   const splits = fontData.split(';base64,')

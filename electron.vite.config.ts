@@ -18,8 +18,15 @@ const isDev = process.env.NODE_ENV === 'development'
 const devAlias = {}
 export default defineConfig({
   main: {
+    assetsInclude: [
+      '**/*.wasm',
+      '**/*.ttf',
+      '**/*.otf',
+      '**/*.woff',
+      '**/*.woff2',
+    ],
     plugins: [tsconfigPaths],
-
+    publicDir: resolve(resources, 'public'),
     build: {
       // ssr: true, // https://github.com/vitejs/vite/issues/4405
       // assetsInlineLimit: 1600000, // 1.6MB (default: 4096)
@@ -34,13 +41,19 @@ export default defineConfig({
         },
       },
     },
-
     resolve: {
       alias: isDev ? devAlias : {},
     },
   },
 
   preload: {
+    assetsInclude: [
+      '**/*.wasm',
+      '**/*.ttf',
+      '**/*.otf',
+      '**/*.woff',
+      '**/*.woff2',
+    ],
     plugins: [tsconfigPaths],
 
     build: {
@@ -49,6 +62,13 @@ export default defineConfig({
   },
 
   renderer: {
+    assetsInclude: [
+      '**/*.wasm',
+      '**/*.ttf',
+      '**/*.otf',
+      '**/*.woff',
+      '**/*.woff2',
+    ],
     define: {
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
       'process.platform': JSON.stringify(process.platform),
