@@ -9,12 +9,7 @@ export function createWindow({ id, ...settings }: WindowProps) {
   const window = new BrowserWindow(settings)
 
   const devServerURL = createURLRoute(process.env['ELECTRON_RENDERER_URL']!, id)
-
-  const fileRoute = createFileRoute(
-    join(__dirname, '../renderer/index.html'),
-    id
-  )
-
+  const fileRoute = createFileRoute(join(__dirname, 'index.html'), id)
   ENVIRONMENT.IS_DEV
     ? window.loadURL(devServerURL)
     : window.loadFile(...fileRoute)
