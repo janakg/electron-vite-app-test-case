@@ -3,7 +3,7 @@
   "name": "my-awesome-electron-app",
   "description": "Your awesome app description",
   "version": "2.0.3",
-  "main": "./out/main/index.js",
+  "main": "./out/main.js",
   "resources": "src/resources",
   "author": {
     "name": "Dalton Menezes",

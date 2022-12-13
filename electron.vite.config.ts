@@ -1,14 +1,12 @@
-import { resolve, normalize, dirname } from 'path'
+import { resolve } from 'path'
 import { defineConfig } from 'electron-vite'
 
 import injectProcessEnvPlugin from 'rollup-plugin-inject-process-env'
 import tsconfigPathsPlugin from 'vite-tsconfig-paths'
 import reactPlugin from '@vitejs/plugin-react'
 
-import { main, resources } from './package.json'
-
-const [devFolder] = normalize(dirname(main)).split(/\/|\\/g)
-const devPath = [devFolder].join('/')
+import { resources } from './package.json'
+const outPath = resolve('./out')
 
 const tsconfigPaths = tsconfigPathsPlugin({
   projects: [resolve('tsconfig.json')],
@@ -32,14 +30,15 @@ export default defineConfig({
       // assetsInlineLimit: 1600000, // 1.6MB (default: 4096)
       rollupOptions: {
         input: {
-          index: resolve('src/main/index.ts'),
+          main: resolve('src/main/index.ts'),
           gen: resolve('src/gen/index.ts'),
         },
 
         output: {
-          dir: resolve(devPath, 'main'),
+          dir: outPath,
         },
       },
+      outDir: outPath,
     },
     resolve: {
       alias: isDev ? devAlias : {},
@@ -57,7 +56,17 @@ export default defineConfig({
     plugins: [tsconfigPaths],
 
     build: {
-      outDir: resolve(devPath, 'preload'),
+      outDir: outPath,
+
+      rollupOptions: {
+        input: {
+          preload: resolve('src/preload/index.ts'),
+        },
+
+        output: {
+          dir: outPath,
+        },
+      },
     },
   },
 
@@ -82,7 +91,7 @@ export default defineConfig({
     publicDir: resolve(resources, 'public'),
 
     build: {
-      outDir: resolve(devPath, 'renderer'),
+      outDir: outPath,
 
       rollupOptions: {
         plugins: [
@@ -93,11 +102,11 @@ export default defineConfig({
         ],
 
         input: {
-          index: resolve('src/renderer/index.html'),
+          app: resolve('src/renderer/index.html'),
         },
 
         output: {
-          dir: resolve(devPath, 'renderer'),
+          dir: outPath,
         },
       },
     },
