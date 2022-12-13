@@ -130,7 +130,7 @@ const window = createWindow({
   id: 'main',
 
   webPreferences: {
-    preload: join(__dirname, '../preload/index.js'),
+    preload: join(__dirname, '../preload.js'),
     sandbox: false,
   },
 })

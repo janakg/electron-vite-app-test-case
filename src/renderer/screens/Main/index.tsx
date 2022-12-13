@@ -4,7 +4,7 @@ import { useEffect } from 'react'
 import { Container, Heading, Button } from 'renderer/components'
 import { useWindowStore } from 'renderer/store'
 
-// The "App" comes from the context bridge in preload/index.ts
+// The "App" comes from the context bridge in preload.ts
 const { App } = window
 
 export function MainScreen() {
