@@ -38,7 +38,7 @@ export default defineConfig({
           dir: outPath,
         },
       },
-      outDir: outPath,
+      // outDir: outPath,
     },
     resolve: {
       alias: isDev ? devAlias : {},
@@ -56,7 +56,7 @@ export default defineConfig({
     plugins: [tsconfigPaths],
 
     build: {
-      outDir: outPath,
+      // outDir: outPath,
 
       rollupOptions: {
         input: {
@@ -91,7 +91,7 @@ export default defineConfig({
     publicDir: resolve(resources, 'public'),
 
     build: {
-      outDir: outPath,
+      // outDir: outPath,
 
       rollupOptions: {
         plugins: [
