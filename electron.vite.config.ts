@@ -38,7 +38,7 @@ export default defineConfig({
           dir: outPath,
         },
       },
-      // outDir: outPath,
+      emptyOutDir: false,
     },
     resolve: {
       alias: isDev ? devAlias : {},
@@ -54,9 +54,8 @@ export default defineConfig({
       '**/*.woff2',
     ],
     plugins: [tsconfigPaths],
-
     build: {
-      // outDir: outPath,
+      emptyOutDir: false,
 
       rollupOptions: {
         input: {
@@ -91,7 +90,7 @@ export default defineConfig({
     publicDir: resolve(resources, 'public'),
 
     build: {
-      // outDir: outPath,
+      emptyOutDir: false,
 
       rollupOptions: {
         plugins: [
