@@ -8,7 +8,7 @@ async function createPackageJSONDistVersion() {
   const { main, scripts, resources, devDependencies, ...rest } = packageJSON
 
   const packageJSONDistVersion = {
-    main: './main/index.js',
+    main: './main.js',
     ...rest,
   }
 
